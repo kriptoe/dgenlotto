@@ -7,8 +7,8 @@ import nftContract from "../contracts/NFT.json"; // Raw ABI import (pulled from 
 
 export default function NumberSelection() {
 
-  const Lotto_ADDRESS = "0x905BB46b46dD8C0925eB3A31078A593c6B3eb865";
-  const FLOOR101_ADDRESS = "0x46c4Ef51a238F37B07C588E147f484a3676439c2";  
+  const Lotto_ADDRESS = "0xcF86A64AfB5194Ad2A0B07E8f02afC72F1C35968";
+  const FLOOR101_ADDRESS = "0xE336239b0989dCDD1b12Ba3094309CAbe4509447";   //mumbai
   const {address, isConnected} = useAccount();
   const [ethSale, setEthSale] = useState(0);  // cost of NFTs being purchased
   const [endDate, setEndDate] = useState(0);  // the time/date the lottery ends 
@@ -153,19 +153,13 @@ export default function NumberSelection() {
     buyLottoTicket()
   }
 
-  function getDate(dt) {
-    const currentDateTime = new Date(); // Get current date and time
-    const milliseconds = dt * 1000;
-    const dateObject = new Date(milliseconds);
-  
-    // Add current date to the received parameter
-    dateObject.setDate(currentDateTime.getDate());
-    dateObject.setMonth(currentDateTime.getMonth());
-    dateObject.setFullYear(currentDateTime.getFullYear());
-  
-    let humanDateFormat = dateObject.toLocaleString(); // 2019-12-9 10:30:15
-    return humanDateFormat;
+  function getDate() {
+    const days = Number(endDate) / 86400;
+   // const roundedDays = Number(days.toString());
+    return days.toFixed(2);
   }
+  
+
 
   return (
     <div>
@@ -173,8 +167,8 @@ export default function NumberSelection() {
   <ConnectButton />
 </div>
       <h1 style={{ textAlign: 'center' }}>Crypto Lotto Draw # {  ethSale.toString() } </h1>
+      <h1 style={{ textAlign: 'center' }}>Draw ends {getDate()} days</h1>
       <h1 style={{ textAlign: 'center' }}>Prizepool {ethers.utils.formatEther((prizepool * BigInt(99)) / BigInt(100))} ETH</h1>
-      <h1 style={{ textAlign: 'center' }}>Draw ends {(Number(BigInt(endDate) / BigInt(86400))).toFixed(2)} days</h1>
       <h1 style={{ textAlign: 'center' }}>Select 3 Numbers</h1>
       <div id="numberSelection">
       <div className="numberRow">
