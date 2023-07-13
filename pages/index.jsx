@@ -8,14 +8,13 @@ import Navbar from "./Navbar"; // Import the Navbar component
 
 export default function NumberSelection() {
 
-  const Lotto_ADDRESS = "0x46c4Ef51a238F37B07C588E147f484a3676439c2";
-  const FLOOR101_ADDRESS = "0x3cc2e98745bb3b4d22DA8C47Cb26CF333F2AC4Fb";   //polygon
+  const FLOOR101_ADDRESS = "0x987DeD735d96d9542Af9d476879C9205BE605091";   //polygon  
+  const Lotto_ADDRESS = "0xaFF1207A1e12A724b8Cb571fEE7f57D2518e3A58";
   const {address, isConnected} = useAccount();
   const [ethSale, setEthSale] = useState(0);  // cost of NFTs being purchased
   const [endDate, setEndDate] = useState(0);  // the time/date the lottery ends 
   const [prizepool, setPrizepool] = useState(BigInt(0)); // Initialize prizepool as a BigInt
-
-  const [nft, setName] = useState(0);  // name of NFT       
+ 
   const [txHash, setTxHash] = useState(0);
   const [selectedNumbers, setSelectedNumbers] = useState([]);
   const [saleSucceeded, setSaleSucceeded] = useState(false);
@@ -33,10 +32,6 @@ export default function NumberSelection() {
     abi: nftContract,
   };
 
-  const { data: getName, error: getNameError } = useContractRead({
-    ...contractConfigNFT,
-    functionName: "name",
-  });
 
   const { data: getEth, error: lotteryNumberError } = useContractRead({
     ...contractConfig,
@@ -53,12 +48,6 @@ export default function NumberSelection() {
     functionName: "getPrizepool",
   });
   
-  useEffect(() => {
-    if (getName) {
-      let temp = getName;
-      setName(temp);
-    }
-  }, [getName]);
 
   useEffect(() => {
     if (getPrizepool) {

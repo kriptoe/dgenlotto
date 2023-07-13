@@ -18,7 +18,7 @@ export default function Navbar() {
         </li>
         <li className={styles.menuItem}>
           <a
-            href="https://polygonscan.com/address/0x46c4Ef51a238F37B07C588E147f484a3676439c2#code"
+            href="https://polygonscan.com/address/0xaFF1207A1e12A724b8Cb571fEE7f57D2518e3A58#code"
             className={styles.menuLink}
             target="_blank"
             rel="noopener noreferrer"
