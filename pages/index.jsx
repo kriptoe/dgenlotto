@@ -4,11 +4,12 @@ import { useAccount,useContractRead, useWaitForTransaction } from "wagmi";
 import { ethers } from "ethers";
 import lotteryContract from "../contracts/Lottery.json"; // Raw ABI import (pulled from etherscan)
 import nftContract from "../contracts/NFT.json"; // Raw ABI import (pulled from etherscan)
+import Navbar from "./Navbar"; // Import the Navbar component
 
 export default function NumberSelection() {
 
-  const Lotto_ADDRESS = "0xcF86A64AfB5194Ad2A0B07E8f02afC72F1C35968";
-  const FLOOR101_ADDRESS = "0xE336239b0989dCDD1b12Ba3094309CAbe4509447";   //mumbai
+  const Lotto_ADDRESS = "0x46c4Ef51a238F37B07C588E147f484a3676439c2";
+  const FLOOR101_ADDRESS = "0x3cc2e98745bb3b4d22DA8C47Cb26CF333F2AC4Fb";   //polygon
   const {address, isConnected} = useAccount();
   const [ethSale, setEthSale] = useState(0);  // cost of NFTs being purchased
   const [endDate, setEndDate] = useState(0);  // the time/date the lottery ends 
@@ -121,7 +122,7 @@ export default function NumberSelection() {
       setSubmitButtonText('Pending');
       setIsPulsing(true); // Start the pulse animation     
       const receipt = await tx.wait();
-      setTxHash(`https://sepolia.etherscan.io/tx/${tx.hash}`);
+      setTxHash(`https://polygonscan.com/tx/${tx.hash}`);
       setSaleSucceeded(true);
     } catch (e) {
       alert(e);
@@ -164,12 +165,13 @@ export default function NumberSelection() {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
+  <Navbar /> {/* Include the Navbar component */}
   <ConnectButton />
 </div>
       <h1 style={{ textAlign: 'center' }}>Crypto Lotto Draw # {  ethSale.toString() } </h1>
       <h1 style={{ textAlign: 'center' }}>Draw ends {getDate()} days</h1>
-      <h1 style={{ textAlign: 'center' }}>Prizepool {ethers.utils.formatEther((prizepool * BigInt(99)) / BigInt(100))} ETH</h1>
-      <h1 style={{ textAlign: 'center' }}>Select 3 Numbers</h1>
+      <h1 style={{ textAlign: 'center' }}>Prizepool {ethers.utils.formatEther((prizepool * BigInt(99)) / BigInt(100))} MATIC</h1>
+      <h1 style={{ textAlign: 'center', color: '#200aa0' }}>Select 3 Numbers : free entry for beta test</h1>
       <div id="numberSelection">
       <div className="numberRow">
       <button
@@ -423,11 +425,9 @@ export default function NumberSelection() {
 {saleSucceeded && ( 
   <div style={{ display: 'flex', justifyContent: 'center' }}>
   <a href={txHash} target="_blank" rel="noreferrer" className="underline underline-offset-2" style={{ display: 'block' }}
-> View TX on etherscan </a></div>
+> View TX on polygonscan </a></div>
 )}
-<br />
-    <a href="https://sepolia.etherscan.io/address/0x594dBc0D1Ef5B9cBAcAfB76C941BD2a855c106f6#code">
-    View Contract</a><br />
+
 
         {/* CSS Styles */}
         <style>

@@ -1,0 +1,23 @@
+.menu {
+  list-style-type: none; /* Remove the bullet points */
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.menu li {
+  margin: 0 10px;
+}
+
+.menuLink {
+  text-decoration: none;
+  color: #200aa0;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.menuLink:hover {
+  background-color: #f0f0f0;
+}
