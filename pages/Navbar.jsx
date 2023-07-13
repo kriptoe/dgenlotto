@@ -7,18 +7,18 @@ export default function Navbar() {
     <nav>
       <ul className={styles.menu}>
         <li className={styles.menuItem}>
-          <a href="./" className={styles.menuLink}>
-            Home
-          </a>
+          <Link href="/" passHref>
+            <span className={styles.menuLink}>Home</span>
+          </Link>
         </li>
         <li className={styles.menuItem}>
-          <a href="/PastWinners" className={styles.menuLink}>
-            Past Winners
-          </a>
+          <Link href="/PastWinners" passHref>
+            <span className={styles.menuLink}>Past Winners</span>
+          </Link>
         </li>
         <li className={styles.menuItem}>
           <a
-            href="https://polygonscan.com/address/0xaFF1207A1e12A724b8Cb571fEE7f57D2518e3A58#code"
+            href="https://polygonscan.com/address/0x46c4Ef51a238F37B07C588E147f484a3676439c2#code"
             className={styles.menuLink}
             target="_blank"
             rel="noopener noreferrer"
