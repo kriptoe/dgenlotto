@@ -1,3 +1,7 @@
+Lotto App - pick the 3 winning numbers and win the jackpot
+
+Developed by Twitter @pcashpeso 
+
 This is a [RainbowKit](https://rainbowkit.com) + [wagmi](https://wagmi.sh) + [Next.js](https://nextjs.org/) project bootstrapped with [`create-rainbowkit`](https://github.com/rainbow-me/rainbowkit/tree/main/packages/create-rainbowkit).
 
 ## Getting Started

@@ -161,7 +161,7 @@ export default function NumberSelection() {
       <h1 style={{ textAlign: 'center', color: '#200aa0' }}>Select 3 Numbers: free entry for beta test</h1>
       <div id="numberSelection">
         <div className="numberRow">
-          {[...Array(8)].map((_, index) => (
+          {[...Array(6)].map((_, index) => (
             <button
               key={index + 1}
               className={`numberButton ${selectedNumbers.includes(index + 1) ? 'selected' : ''}`}
@@ -172,24 +172,35 @@ export default function NumberSelection() {
           ))}
         </div>
         <div className="numberRow">
-          {[...Array(8)].map((_, index) => (
+          {[...Array(6)].map((_, index) => (
             <button
-              key={index + 9}
-              className={`numberButton ${selectedNumbers.includes(index + 9) ? 'selected' : ''}`}
-              onClick={() => selectNumber(index + 9)}
+              key={index + 7}
+              className={`numberButton ${selectedNumbers.includes(index + 7) ? 'selected' : ''}`}
+              onClick={() => selectNumber(index + 7)}
             >
-              {index + 9}
+              {index + 7}
             </button>
           ))}
         </div>
         <div className="numberRow">
-          {[...Array(8)].map((_, index) => (
+          {[...Array(6)].map((_, index) => (
             <button
-              key={index + 17}
-              className={`numberButton ${selectedNumbers.includes(index + 17) ? 'selected' : ''}`}
-              onClick={() => selectNumber(index + 17)}
+              key={index + 13}
+              className={`numberButton ${selectedNumbers.includes(index + 13) ? 'selected' : ''}`}
+              onClick={() => selectNumber(index + 13)}
             >
-              {index + 17}
+              {index + 13}
+            </button>
+          ))}
+        </div>
+        <div className="numberRow">
+          {[...Array(6)].map((_, index) => (
+            <button
+              key={index + 19}
+              className={`numberButton ${selectedNumbers.includes(index + 19) ? 'selected' : ''}`}
+              onClick={() => selectNumber(index + 19)}
+            >
+              {index + 19}
             </button>
           ))}
         </div>
@@ -286,6 +297,7 @@ export default function NumberSelection() {
       </style>
     </div>
   );
+  
   
   
   ;
