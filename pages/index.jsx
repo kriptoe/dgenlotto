@@ -149,317 +149,131 @@ export default function NumberSelection() {
     return days.toFixed(2);
   }
   
-
-
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-  <Navbar /> {/* Include the Navbar component */}
-  <ConnectButton />
-</div>
-      <h1 style={{ textAlign: 'center' }}>Crypto Lotto Draw # {  ethSale.toString() } </h1>
+        <Navbar /> {/* Include the Navbar component */}
+        <ConnectButton />
+      </div>
+      <h1 style={{ textAlign: 'center' }}>Crypto Lotto Draw #{ethSale.toString()}</h1>
       <h1 style={{ textAlign: 'center' }}>Draw ends {getDate()} days</h1>
       <h1 style={{ textAlign: 'center' }}>Prizepool {ethers.utils.formatEther((prizepool * BigInt(99)) / BigInt(100))} MATIC</h1>
-      <h1 style={{ textAlign: 'center', color: '#200aa0' }}>Select 3 Numbers : free entry for beta test</h1>
+      <h1 style={{ textAlign: 'center', color: '#200aa0' }}>Select 3 Numbers: free entry for beta test</h1>
       <div id="numberSelection">
-      <div className="numberRow">
-      <button
-            className={`numberButton firstRow ${selectedNumbers.includes(1) ? 'selected' : ''}`}
-            onClick={() => selectNumber(1)}
-            id="numberButton1"
-          >
-            1
-          </button>
-  <button
-    className={`numberButton firstRow ${selectedNumbers.includes(2) ? 'selected' : ''}`}
-    onClick={() => selectNumber(2)}
-    id="numberButton2"
-  >
-    2
-  </button>
-  <button
-    className={`numberButton firstRow ${selectedNumbers.includes(3) ? 'selected' : ''}`}
-    onClick={() => selectNumber(3)}
-    id="numberButton3"
-  >
-    3
-  </button>
-  <button
-    className={`numberButton firstRow ${selectedNumbers.includes(4) ? 'selected' : ''}`}
-    onClick={() => selectNumber(4)}
-    id="numberButton4"
-  >
-    4
-  </button>
-  <button
-    className={`numberButton firstRow ${selectedNumbers.includes(5) ? 'selected' : ''}`}
-    onClick={() => selectNumber(5)}
-    id="numberButton5"
-  >
-    5
-  </button>
-  <button
-    className={`numberButton firstRow ${selectedNumbers.includes(6) ? 'selected' : ''}`}
-    onClick={() => selectNumber(6)}
-    id="numberButton6"
-  >
-    6
-  </button>
-  <button
-    className={`numberButton firstRow ${selectedNumbers.includes(7) ? 'selected' : ''}`}
-    onClick={() => selectNumber(7)}
-    id="numberButton7"
-  >
-    7
-  </button>
-  <button
-    className={`numberButton firstRow ${selectedNumbers.includes(8) ? 'selected' : ''}`}
-    onClick={() => selectNumber(8)}
-    id="numberButton8"
-  >
-    8
-  </button>
-  <button
-    className={`numberButton firstRow ${selectedNumbers.includes(9) ? 'selected' : ''}`}
-    onClick={() => selectNumber(9)}
-    id="numberButton9"
-  >
-    9
-  </button>
-  <button
-    className={`numberButton firstRow ${selectedNumbers.includes(10) ? 'selected' : ''}`}
-    onClick={() => selectNumber(10)}
-    id="numberButton10"
-  >
-    10
-  </button>
-</div>
-
-<div className="numberRow">
-  <button
-    className={`numberButton ${selectedNumbers.includes(11) ? 'selected' : ''}`}
-    onClick={() => selectNumber(11)}
-    id="numberButton11"
-  >
-    11
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(12) ? 'selected' : ''}`}
-    onClick={() => selectNumber(12)}
-    id="numberButton12"
-  >
-    12
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(13) ? 'selected' : ''}`}
-    onClick={() => selectNumber(13)}
-    id="numberButton13"
-  >
-    13
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(14) ? 'selected' : ''}`}
-    onClick={() => selectNumber(14)}
-    id="numberButton14"
-  >
-    14
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(15) ? 'selected' : ''}`}
-    onClick={() => selectNumber(15)}
-    id="numberButton15"
-  >
-    15
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(16) ? 'selected' : ''}`}
-    onClick={() => selectNumber(16)}
-    id="numberButton16"
-  >
-    16
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(17) ? 'selected' : ''}`}
-    onClick={() => selectNumber(17)}
-    id="numberButton17"
-  >
-    17
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(18) ? 'selected' : ''}`}
-    onClick={() => selectNumber(18)}
-    id="numberButton18"
-  >
-    18
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(19) ? 'selected' : ''}`}
-    onClick={() => selectNumber(19)}
-    id="numberButton19"
-  >
-    19
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(20) ? 'selected' : ''}`}
-    onClick={() => selectNumber(20)}
-    id="numberButton20"
-  >
-    20
-  </button>
-</div>
-<div className="numberRow">
-  <button
-    className={`numberButton ${selectedNumbers.includes(21) ? 'selected' : ''}`}
-    onClick={() => selectNumber(21)}
-    id="numberButton21"
-  >
-    21
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(22) ? 'selected' : ''}`}
-    onClick={() => selectNumber(22)}
-    id="numberButton22"
-  >
-    22
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(23) ? 'selected' : ''}`}
-    onClick={() => selectNumber(23)}
-    id="numberButton23"
-  >
-    23
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(24) ? 'selected' : ''}`}
-    onClick={() => selectNumber(24)}
-    id="numberButton24"
-  >
-    24
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(25) ? 'selected' : ''}`}
-    onClick={() => selectNumber(25)}
-    id="numberButton25"
-  >
-    25
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(26) ? 'selected' : ''}`}
-    onClick={() => selectNumber(26)}
-    id="numberButton26"
-  >
-    26
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(27) ? 'selected' : ''}`}
-    onClick={() => selectNumber(27)}
-    id="numberButton27"
-  >
-    27
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(28) ? 'selected' : ''}`}
-    onClick={() => selectNumber(28)}
-    id="numberButton28"
-  >
-    28
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(29) ? 'selected' : ''}`}
-    onClick={() => selectNumber(29)}
-    id="numberButton29"
-  >
-    29
-  </button>
-  <button
-    className={`numberButton ${selectedNumbers.includes(30) ? 'selected' : ''}`}
-    onClick={() => selectNumber(30)}
-    id="numberButton30"
-  >
-    30
-  </button>
-</div>
-
+        <div className="numberRow">
+          {[...Array(10)].map((_, index) => (
+            <button
+              key={index + 1}
+              className={`numberButton ${selectedNumbers.includes(index + 1) ? 'selected' : ''}`}
+              onClick={() => selectNumber(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+        <div className="numberRow">
+          {[...Array(10)].map((_, index) => (
+            <button
+              key={index + 11}
+              className={`numberButton ${selectedNumbers.includes(index + 11) ? 'selected' : ''}`}
+              onClick={() => selectNumber(index + 11)}
+            >
+              {index + 11}
+            </button>
+          ))}
+        </div>
+        <div className="numberRow">
+          {[...Array(10)].map((_, index) => (
+            <button
+              key={index + 21}
+              className={`numberButton ${selectedNumbers.includes(index + 21) ? 'selected' : ''}`}
+              onClick={() => selectNumber(index + 21)}
+            >
+              {index + 21}
+            </button>
+          ))}
+        </div>
       </div>
-
       <h3 style={{ textAlign: 'center' }}>
         <div id="selectedNumbers">Selected Numbers: {selectedNumbers.join(', ')}</div>
       </h3>
-{/* Submit button */}
-<button className={`submitButton ${isPulsing ? 'pulsing' : ''}`}
-  style={{
-    display: 'block',
-    margin: '0 auto',
-    padding: '10px 20px',
-    fontSize: '16px',
-    borderRadius: '5px',
-    border: 'none',
-    backgroundColor: '#0d6efd',
-    color: '#fff',
-    cursor: 'pointer',
-  }}
-  onClick={enterLotto}
-  onMouseOver={(e) => (e.target.style.backgroundColor = '#FFA500')}
-  onMouseOut={(e) => (e.target.style.backgroundColor = '#0d6efd')}
->
-  {submitButtonText}
-</button>
-
-
-<br />
-<div style={{ display: 'flex', justifyContent: 'center' }}>
-  {nftImageUrl && <img src={nftImageUrl} alt="NFT" style={{ margin: '0' }} />} {/* Render the NFT image if available */}
-</div>
-
-{saleSucceeded && ( 
-  <div style={{ display: 'flex', justifyContent: 'center' }}>
-  <a href={txHash} target="_blank" rel="noreferrer" className="underline underline-offset-2" style={{ display: 'block' }}
-> View TX on polygonscan </a></div>
-)}
-
-
-        {/* CSS Styles */}
-        <style>
-  {`
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.pulsing {
-  animation: pulse 1s infinite;
-}
-    .numberButton {
-      margin: 5px;
-      padding: 10px 15px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      background-color: #fff;
-      cursor: pointer;
-      flex: 1;
-      text-align: center;
-      max-width: 70px; /* Adjust the max-width as needed */
-    }
-
-    .numberButton.selected {
-      background-color: #0d6efd;
-      color: #fff;
-    }
-
-    .numberRow {
-      display: flex;
-      justify-content: center;
-    }
-  `}
-</style>
+      {/* Submit button */}
+      <button
+        className={`submitButton ${isPulsing ? 'pulsing' : ''}`}
+        style={{
+          display: 'block',
+          margin: '0 auto',
+          padding: '10px 20px',
+          fontSize: '16px',
+          borderRadius: '5px',
+          border: 'none',
+          backgroundColor: '#0d6efd',
+          color: '#fff',
+          cursor: 'pointer',
+        }}
+        onClick={enterLotto}
+        onMouseOver={(e) => (e.target.style.backgroundColor = '#FFA500')}
+        onMouseOut={(e) => (e.target.style.backgroundColor = '#0d6efd')}
+      >
+        {submitButtonText}
+      </button>
+      <br />
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        {nftImageUrl && <img src={nftImageUrl} alt="NFT" style={{ margin: '0' }} />} {/* Render the NFT image if available */}
+      </div>
+      {saleSucceeded && (
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <a
+            href={txHash}
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-2"
+            style={{ display: 'block' }}
+          >
+            View TX on polygonscan
+          </a>
+        </div>
+      )}
+      {/* CSS Styles */}
+      <style>
+        {`
+          @keyframes pulse {
+            0% {
+              transform: scale(1);
+            }
+            50% {
+              transform: scale(1.1);
+            }
+            100% {
+              transform: scale(1);
+            }
+          }
+          .pulsing {
+            animation: pulse 1s infinite;
+          }
+          .numberButton {
+            margin: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            cursor: pointer;
+            flex: 1;
+            text-align: center;
+            max-width: 70px; /* Adjust the max-width as needed */
+          }
+          .numberButton.selected {
+            background-color: #0d6efd;
+            color: #fff;
+          }
+          .numberRow {
+            display: flex;
+            justify-content: center;
+          }
+        `}
+      </style>
     </div>
   );
+  ;
 }
