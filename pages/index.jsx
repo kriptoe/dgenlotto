@@ -148,7 +148,7 @@ export default function NumberSelection() {
    // const roundedDays = Number(days.toString());
     return days.toFixed(2);
   }
-  
+ 
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -161,7 +161,7 @@ export default function NumberSelection() {
       <h1 style={{ textAlign: 'center', color: '#200aa0' }}>Select 3 Numbers: free entry for beta test</h1>
       <div id="numberSelection">
         <div className="numberRow">
-          {[...Array(10)].map((_, index) => (
+          {[...Array(8)].map((_, index) => (
             <button
               key={index + 1}
               className={`numberButton ${selectedNumbers.includes(index + 1) ? 'selected' : ''}`}
@@ -172,24 +172,35 @@ export default function NumberSelection() {
           ))}
         </div>
         <div className="numberRow">
-          {[...Array(10)].map((_, index) => (
+          {[...Array(8)].map((_, index) => (
             <button
-              key={index + 11}
-              className={`numberButton ${selectedNumbers.includes(index + 11) ? 'selected' : ''}`}
-              onClick={() => selectNumber(index + 11)}
+              key={index + 9}
+              className={`numberButton ${selectedNumbers.includes(index + 9) ? 'selected' : ''}`}
+              onClick={() => selectNumber(index + 9)}
             >
-              {index + 11}
+              {index + 9}
             </button>
           ))}
         </div>
         <div className="numberRow">
-          {[...Array(10)].map((_, index) => (
+          {[...Array(8)].map((_, index) => (
             <button
-              key={index + 21}
-              className={`numberButton ${selectedNumbers.includes(index + 21) ? 'selected' : ''}`}
-              onClick={() => selectNumber(index + 21)}
+              key={index + 17}
+              className={`numberButton ${selectedNumbers.includes(index + 17) ? 'selected' : ''}`}
+              onClick={() => selectNumber(index + 17)}
             >
-              {index + 21}
+              {index + 17}
+            </button>
+          ))}
+        </div>
+        <div className="numberRow">
+          {[...Array(6)].map((_, index) => (
+            <button
+              key={index + 25}
+              className={`numberButton ${selectedNumbers.includes(index + 25) ? 'selected' : ''}`}
+              onClick={() => selectNumber(index + 25)}
+            >
+              {index + 25}
             </button>
           ))}
         </div>
@@ -275,5 +286,7 @@ export default function NumberSelection() {
       </style>
     </div>
   );
+  
+  
   ;
 }
