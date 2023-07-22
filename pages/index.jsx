@@ -9,7 +9,7 @@ import Navbar from "./Navbar"; // Import the Navbar component
 export default function NumberSelection() {
 
   const FLOOR101_ADDRESS = "0x987DeD735d96d9542Af9d476879C9205BE605091";   //polygon  
-  const Lotto_ADDRESS = "0xaFF1207A1e12A724b8Cb571fEE7f57D2518e3A58";
+  const Lotto_ADDRESS = "0x83fd9423A512356C9234227c650AF5040AedF126";
   const {address, isConnected} = useAccount();
   const [ethSale, setEthSale] = useState(0);  // cost of NFTs being purchased
   const [endDate, setEndDate] = useState(0);  // the time/date the lottery ends 
@@ -107,7 +107,7 @@ export default function NumberSelection() {
   
     try {
       // Call enterLottery function
-      let tx = await marketWithSigner.enterLottery(selectedNumbers[0], selectedNumbers[1], selectedNumbers[2], { value: ethers.utils.parseEther("0.001") });
+      let tx = await marketWithSigner.enterLottery(selectedNumbers[0], selectedNumbers[1], selectedNumbers[2], { value: ethers.utils.parseEther("0.1") });
       setSubmitButtonText('Pending');
       setIsPulsing(true); // Start the pulse animation     
       const receipt = await tx.wait();
@@ -158,7 +158,7 @@ export default function NumberSelection() {
       <h1 style={{ textAlign: 'center' }}>Crypto Lotto Draw #{ethSale.toString()}</h1>
       <h1 style={{ textAlign: 'center' }}>Draw ends {getDate()} days</h1>
       <h1 style={{ textAlign: 'center' }}>Prizepool {ethers.utils.formatEther((prizepool * BigInt(99)) / BigInt(100))} MATIC</h1>
-      <h1 style={{ textAlign: 'center', color: '#200aa0' }}>Select 3 Numbers: free entry for beta test</h1>
+      <h1 style={{ textAlign: 'center', color: '#200aa0' }}>Select 3 Numbers: 0.1 matic entry fee</h1>
       <div id="numberSelection">
         <div className="numberRow">
           {[...Array(6)].map((_, index) => (
@@ -297,8 +297,6 @@ export default function NumberSelection() {
       </style>
     </div>
   );
-  
-  
   
   ;
 }
