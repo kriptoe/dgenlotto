@@ -162,161 +162,167 @@ export default function NumberSelection() {
 
   return (
     
-    <div className="background-container">
-     {/* Add a vertical gap of 20px */}
+<div className="background-container">
+  {/* Add a vertical gap of 20px */}
   <div style={{ height: '10px' }} />
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Navbar /> {/* Include the Navbar component */}
-        <ConnectButton />
-      </div>
-     {/* Add a vertical gap of 20px */}
+  <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <Navbar /> {/* Include the Navbar component */}
+    <ConnectButton />
+  </div>
+  {/* Add a vertical gap of 20px */}
   <div style={{ height: '20px' }} />
+  <div className="container" style={{ backgroundColor: '#fff', padding: '10px', margin: '0 auto', borderRadius: '20px', maxWidth: '600px' }}>
+    <h1 style={{ textAlign: 'center' }}>Crypto Lotto Draw #{ethSale.toString()}</h1>
+    <h1 className="second-h1" style={{ textAlign: 'center' }}>Draw ends {getDate()} days</h1>
+    <h1 className="second-h1" style={{ textAlign: 'center' }}>Prizepool {truncate(ethers.utils.formatEther((prizepool * BigInt(99)) / BigInt(100)), 2)} MATIC</h1>
+    <h1 className="second-h1" style={{ textAlign: 'center', color: '#200aa0' }}>Select 3 Numbers: 0.1 matic entry fee</h1>
 
-      <div className="container" style={{ backgroundColor: '#fff', width: '600px', padding: '10px', margin: '0 auto', borderRadius: '20px' }}>
-      <h1 style={{ textAlign: 'center' }}>Crypto Lotto Draw #{ethSale.toString()}</h1>
-      <h1 class="second-h1" style={{ textAlign: 'center' }}>Draw ends {getDate()} days</h1>
-      <h1 class="second-h1" style={{ textAlign: 'center' }}>Prizepool {truncate(ethers.utils.formatEther((prizepool * BigInt(99)) / BigInt(100)),2)} MATIC</h1>
-      <h1 class="second-h1" style={{ textAlign: 'center', color: '#200aa0' }}>Select 3 Numbers: 0.1 matic entry fee</h1>
-      
-      <div id="numberSelection" >
-        <div className="numberRow">
-          {[...Array(6)].map((_, index) => (
-            <button
-              key={index + 1}
-              className={`numberButton ${selectedNumbers.includes(index + 1) ? 'selected' : ''}`}
-              onClick={() => selectNumber(index + 1)}
-            >
-              {index + 1}
-            </button>
-          ))}
-        </div>
-        <div className="numberRow">
-          {[...Array(6)].map((_, index) => (
-            <button
-              key={index + 7}
-              className={`numberButton ${selectedNumbers.includes(index + 7) ? 'selected' : ''}`}
-              onClick={() => selectNumber(index + 7)}
-            >
-              {index + 7}
-            </button>
-          ))}
-        </div>
-        <div className="numberRow">
-          {[...Array(6)].map((_, index) => (
-            <button
-              key={index + 13}
-              className={`numberButton ${selectedNumbers.includes(index + 13) ? 'selected' : ''}`}
-              onClick={() => selectNumber(index + 13)}
-            >
-              {index + 13}
-            </button>
-          ))}
-        </div>
-        <div className="numberRow">
-          {[...Array(6)].map((_, index) => (
-            <button
-              key={index + 19}
-              className={`numberButton ${selectedNumbers.includes(index + 19) ? 'selected' : ''}`}
-              onClick={() => selectNumber(index + 19)}
-            >
-              {index + 19}
-            </button>
-          ))}
-        </div>
-        <div className="numberRow">
-          {[...Array(6)].map((_, index) => (
-            <button
-              key={index + 25}
-              className={`numberButton ${selectedNumbers.includes(index + 25) ? 'selected' : ''}`}
-              onClick={() => selectNumber(index + 25)}
-            >
-              {index + 25}
-            </button>
-          ))}
-        </div>
-      </div>
-      <h3 style={{ textAlign: 'center' }}>
-        <div id="selectedNumbers">Selected Numbers: {selectedNumbers.join(', ')}</div>
-      </h3>
-      {/* Submit button */}
-      <button
-        className={`submitButton ${isPulsing ? 'pulsing' : ''}`}
-        style={{
-          display: 'block',
-          margin: '0 auto',
-          padding: '10px 20px',
-          fontSize: '16px',
-          borderRadius: '5px',
-          border: 'none',
-          backgroundColor: '#0d6efd',
-          color: '#fff',
-          cursor: 'pointer',
-        }}
-        onClick={enterLotto}
-        onMouseOver={(e) => (e.target.style.backgroundColor = '#FFA500')}
-        onMouseOut={(e) => (e.target.style.backgroundColor = '#0d6efd')}
-      >
-        {submitButtonText}
-      </button>
-
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        {nftImageUrl && <img src={nftImageUrl} alt="NFT" style={{ margin: '0' }} />} {/* Render the NFT image if available */}
-      </div>
-      {saleSucceeded && (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <a
-            href={txHash}
-            target="_blank"
-            rel="noreferrer"
-            className="underline underline-offset-2"
-            style={{ display: 'block' }}
+    <div id="numberSelection">
+      <div className="numberRow">
+        {[...Array(6)].map((_, index) => (
+          <button
+            key={index + 1}
+            className={`numberButton ${selectedNumbers.includes(index + 1) ? 'selected' : ''}`}
+            onClick={() => selectNumber(index + 1)}
           >
-            View TX on polygonscan
-          </a>
-        </div>
-      )}
-      {/* CSS Styles */}
-      
-      <style>
-        {`
-          @keyframes pulse {
-            0% {
-              transform: scale(1);
-            }
-            50% {
-              transform: scale(1.1);
-            }
-            100% {
-              transform: scale(1);
-            }
-          }
-          .pulsing {
-            animation: pulse 1s infinite;
-          }
-          .numberButton {
-            margin: 5px;
-            padding: 10px 15px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            background-color: #fff;
-            cursor: pointer;
-            flex: 1;
-            text-align: center;
-            max-width: 70px; /* Adjust the max-width as needed */
-          }
-          .numberButton.selected {
-            background-color: #0d6efd;
-            color: #fff;
-          }
-          .numberRow {
-            display: flex;
-            justify-content: center;
-          }
-        `}
-      </style>
+            {index + 1}
+          </button>
+        ))}
+      </div>
+      <div className="numberRow">
+        {[...Array(6)].map((_, index) => (
+          <button
+            key={index + 7}
+            className={`numberButton ${selectedNumbers.includes(index + 7) ? 'selected' : ''}`}
+            onClick={() => selectNumber(index + 7)}
+          >
+            {index + 7}
+          </button>
+        ))}
+      </div>
+      <div className="numberRow">
+        {[...Array(6)].map((_, index) => (
+          <button
+            key={index + 13}
+            className={`numberButton ${selectedNumbers.includes(index + 13) ? 'selected' : ''}`}
+            onClick={() => selectNumber(index + 13)}
+          >
+            {index + 13}
+          </button>
+        ))}
+      </div>
+      <div className="numberRow">
+        {[...Array(6)].map((_, index) => (
+          <button
+            key={index + 19}
+            className={`numberButton ${selectedNumbers.includes(index + 19) ? 'selected' : ''}`}
+            onClick={() => selectNumber(index + 19)}
+          >
+            {index + 19}
+          </button>
+        ))}
+      </div>
+      <div className="numberRow">
+        {[...Array(6)].map((_, index) => (
+          <button
+            key={index + 25}
+            className={`numberButton ${selectedNumbers.includes(index + 25) ? 'selected' : ''}`}
+            onClick={() => selectNumber(index + 25)}
+          >
+            {index + 25}
+          </button>
+        ))}
+      </div>
     </div>
+    <h3 style={{ textAlign: 'center' }}>
+      <div id="selectedNumbers">Selected Numbers: {selectedNumbers.join(', ')}</div>
+    </h3>
+    {/* Submit button */}
+    <button
+      className={`submitButton ${isPulsing ? 'pulsing' : ''}`}
+      style={{
+        display: 'block',
+        margin: '0 auto',
+        padding: '10px 20px',
+        fontSize: '16px',
+        borderRadius: '5px',
+        border: 'none',
+        backgroundColor: '#0d6efd',
+        color: '#fff',
+        cursor: 'pointer',
+      }}
+      onClick={enterLotto}
+      onMouseOver={(e) => (e.target.style.backgroundColor = '#FFA500')}
+      onMouseOut={(e) => (e.target.style.backgroundColor = '#0d6efd')}
+    >
+      {submitButtonText}
+    </button>
+  </div>
+  <div style={{ display: 'flex', justifyContent: 'center' }}>
+    {nftImageUrl && <img src={nftImageUrl} alt="NFT" style={{ margin: '0' }} />} {/* Render the NFT image if available */}
+  </div>
+  {saleSucceeded && (
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <a
+        href={txHash}
+        target="_blank"
+        rel="noreferrer"
+        className="underline underline-offset-2"
+        style={{ display: 'block' }}
+      >
+        View TX on polygonscan
+      </a>
+    </div>
+  )}
+  {/* CSS Styles */}
+  <style>
+    {`
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      .pulsing {
+        animation: pulse 1s infinite;
+      }
+      .numberButton {
+        margin: 5px;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        cursor: pointer;
+        flex: 1;
+        text-align: center;
+        max-width: 70px; /* Adjust the max-width as needed */
+      }
+      .numberButton.selected {
+        background-color: #0d6efd;
+        color: #fff;
+      }
+      .numberRow {
+        display: flex;
+        justify-content: center;
+      }
+
+      /* Media Query for Mobile Phones */
+      @media (max-width: 600px) {
+        .container {
+          width: 90%; /* Reduce width to 90% for better fit on smaller screens */
+        }
+      }
+    `}
+  </style>
+</div>
+
+
   );
   
   ;
