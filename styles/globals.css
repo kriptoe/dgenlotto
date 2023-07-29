@@ -7,7 +7,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 div.background-container {
-  background-image: url("../pages/lotto2.png");
+  background-image: linear-gradient(to right bottom, #fbdafb, #ffe0e7, #ffebe1, #fcf6eb, #fcfdfb);
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
