@@ -17,6 +17,9 @@ a {
   color: inherit;
   text-decoration: none;
 }
+horizontalGap {
+  width: 20px; /* Set the width of the horizontal gap */
+}
 h1 {
   font-family: 'Bungee Spice', sans-serif;
   font-size: 40px; /* You can adjust the font size here */

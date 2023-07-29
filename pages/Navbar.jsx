@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import styles from "../styles/navbar.module.css";
 
 export default function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <nav>
-      <ul className={styles.menu}>
+    <nav className={styles.navbar}>
+      <div className={styles.menuToggle} onClick={toggleMenu}>
+        {isMenuOpen ? "Close" : "Menu"}
+      </div>
+      <ul className={`${styles.menuVertical} ${isMenuOpen ? styles.activeMenu : styles.hiddenMenu}`}>
         <li className={styles.menuItem}>
           <Link href="/" passHref>
             <span className={styles.menuLink}>Home</span>

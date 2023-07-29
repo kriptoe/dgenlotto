@@ -1,13 +1,12 @@
 import React, {  useState, useEffect } from "react";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useAccount,useContractRead, useWaitForTransaction } from "wagmi";
+import { useAccount,useContractRead } from "wagmi";
 import { ethers } from "ethers";
 import lotteryContract from "../contracts/Lottery.json"; // Raw ABI import (pulled from etherscan)
 import nftContract from "../contracts/NFT.json"; // Raw ABI import (pulled from etherscan)
 import Navbar from "./Navbar"; // Import the Navbar component
-import lotto from "./lotto.jpg"; // Correct path
 import Image from 'next/image'
-import { Dancing_Script } from 'next/font/google';
+import styles from "../styles/index.module.css";
 
 export default function NumberSelection() {
 
@@ -24,17 +23,16 @@ export default function NumberSelection() {
   const [submitButtonText, setSubmitButtonText] = useState('Submit');
   const [nftImageUrl, setNftImageUrl] = useState(''); // State to store the NFT image URL
   const [isPulsing, setIsPulsing] = useState(false);
-  
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   const contractConfig = {
     address: Lotto_ADDRESS,
     abi: lotteryContract,
   };
-
-  const contractConfigNFT = {
-    address: FLOOR101_ADDRESS,
-    abi: nftContract,
-  };
-
 
   const { data: getEth, error: lotteryNumberError } = useContractRead({
     ...contractConfig,
@@ -160,15 +158,23 @@ export default function NumberSelection() {
     return str;
 }
 
+
   return (
     
 <div className="background-container">
   {/* Add a vertical gap of 20px */}
   <div style={{ height: '10px' }} />
   <div style={{ display: 'flex', justifyContent: 'center' }}>
-    <Navbar /> {/* Include the Navbar component */}
-    <ConnectButton />
+    <div className={styles.backgroundContainer}>
+      <div className={styles.contentContainer}>
+        <div className={styles.navbarContainer}>
+          <Navbar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+        </div>
+        <ConnectButton />
+      </div>
+    </div>
   </div>
+
   {/* Add a vertical gap of 20px */}
   <div style={{ height: '20px' }} />
   <div className="container" style={{ backgroundColor: '#fff', padding: '10px', margin: '0 auto', borderRadius: '20px', maxWidth: '600px' }}>
@@ -290,6 +296,9 @@ export default function NumberSelection() {
       }
       .pulsing {
         animation: pulse 1s infinite;
+      }
+      .horizontalGap {
+        width: 20px; /* Set the width of the horizontal gap */
       }
       .numberButton {
         margin: 5px;

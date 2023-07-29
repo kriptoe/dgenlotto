@@ -1,0 +1,19 @@
+/* index.module.css */
+
+.backgroundContainer {
+  /* Apply any background styling you want */
+}
+
+.contentContainer {
+  display: flex;
+  align-items: center;
+}
+
+.navbarContainer {
+  flex: 1; /* Take up remaining available space */
+  margin-right: 20px; /* Adjust this value to control the horizontal gap */
+}
+
+.horizontalGap {
+  width: 20px; /* Set the width of the horizontal gap */
+}
