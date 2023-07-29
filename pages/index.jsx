@@ -5,6 +5,9 @@ import { ethers } from "ethers";
 import lotteryContract from "../contracts/Lottery.json"; // Raw ABI import (pulled from etherscan)
 import nftContract from "../contracts/NFT.json"; // Raw ABI import (pulled from etherscan)
 import Navbar from "./Navbar"; // Import the Navbar component
+import lotto from "./lotto.jpg"; // Correct path
+import Image from 'next/image'
+import { Dancing_Script } from 'next/font/google';
 
 export default function NumberSelection() {
 
@@ -149,17 +152,33 @@ export default function NumberSelection() {
     return days.toFixed(2);
   }
  
+  function truncate(str, maxDecimalDigits) {
+    if (str.includes('.')) {
+        const parts = str.split('.');
+        return parts[0] + '.' + parts[1].slice(0, maxDecimalDigits);
+    }
+    return str;
+}
+
   return (
-    <div>
+    
+    <div className="background-container">
+     {/* Add a vertical gap of 20px */}
+  <div style={{ height: '10px' }} />
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Navbar /> {/* Include the Navbar component */}
         <ConnectButton />
       </div>
+     {/* Add a vertical gap of 20px */}
+  <div style={{ height: '20px' }} />
+
+      <div className="container" style={{ backgroundColor: '#fff', width: '600px', padding: '10px', margin: '0 auto', borderRadius: '20px' }}>
       <h1 style={{ textAlign: 'center' }}>Crypto Lotto Draw #{ethSale.toString()}</h1>
-      <h1 style={{ textAlign: 'center' }}>Draw ends {getDate()} days</h1>
-      <h1 style={{ textAlign: 'center' }}>Prizepool {ethers.utils.formatEther((prizepool * BigInt(99)) / BigInt(100))} MATIC</h1>
-      <h1 style={{ textAlign: 'center', color: '#200aa0' }}>Select 3 Numbers: 0.1 matic entry fee</h1>
-      <div id="numberSelection">
+      <h1 class="second-h1" style={{ textAlign: 'center' }}>Draw ends {getDate()} days</h1>
+      <h1 class="second-h1" style={{ textAlign: 'center' }}>Prizepool {truncate(ethers.utils.formatEther((prizepool * BigInt(99)) / BigInt(100)),2)} MATIC</h1>
+      <h1 class="second-h1" style={{ textAlign: 'center', color: '#200aa0' }}>Select 3 Numbers: 0.1 matic entry fee</h1>
+      
+      <div id="numberSelection" >
         <div className="numberRow">
           {[...Array(6)].map((_, index) => (
             <button
@@ -239,7 +258,8 @@ export default function NumberSelection() {
       >
         {submitButtonText}
       </button>
-      <br />
+
+      </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         {nftImageUrl && <img src={nftImageUrl} alt="NFT" style={{ margin: '0' }} />} {/* Render the NFT image if available */}
       </div>
@@ -257,6 +277,7 @@ export default function NumberSelection() {
         </div>
       )}
       {/* CSS Styles */}
+      
       <style>
         {`
           @keyframes pulse {
