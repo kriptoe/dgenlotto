@@ -1,8 +1,8 @@
 Lotto App - pick the 3 winning numbers and win the jackpot
 
-Developed by Twitter @pcashpeso 
+Developed by @pcashpeso 
 
-This is a [RainbowKit](https://rainbowkit.com) + [wagmi](https://wagmi.sh) + [Next.js](https://nextjs.org/) project bootstrapped with [`create-rainbowkit`](https://github.com/rainbow-me/rainbowkit/tree/main/packages/create-rainbowkit).
+Contracts can be viewed at https://polygonscan.com/address/0x83fd9423A512356C9234227c650AF5040AedF126#code
 
 ## Getting Started
 

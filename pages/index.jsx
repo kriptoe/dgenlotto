@@ -12,7 +12,7 @@ export default function NumberSelection() {
 
   const FLOOR101_ADDRESS = "0x987DeD735d96d9542Af9d476879C9205BE605091";   //polygon  
   const Lotto_ADDRESS = "0x83fd9423A512356C9234227c650AF5040AedF126";
-  const {address, isConnected} = useAccount();
+  //const {address, isConnected} = useAccount();
   const [ethSale, setEthSale] = useState(0);  // cost of NFTs being purchased
   const [endDate, setEndDate] = useState(0);  // the time/date the lottery ends 
   const [prizepool, setPrizepool] = useState(BigInt(0)); // Initialize prizepool as a BigInt
@@ -157,7 +157,6 @@ export default function NumberSelection() {
     }
     return str;
 }
-
 
   return (
     
