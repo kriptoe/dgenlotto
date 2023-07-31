@@ -136,11 +136,17 @@ export default function NumberSelection() {
     }
   }
 
+  // This function makes an entry into the lotto draw
   const enterLotto = async () => { 
     if (selectedNumbers.length !== 3) {
       alert('Please select exactly 3 numbers.');
       return; 
   }
+  if (endDate == 0) {
+    // Show a pop-up alert to notify the user that the lottery has ended
+    window.alert("The lottery has ended. Please try again in the next round.");
+    return; // Return early to prevent further execution of the function
+}
     buyLottoTicket()
   }
 
@@ -178,8 +184,8 @@ export default function NumberSelection() {
   <div style={{ height: '20px' }} />
   <div className="container" style={{ backgroundColor: '#fff', padding: '10px', margin: '0 auto', borderRadius: '20px', maxWidth: '600px' }}>
     <h1 style={{ textAlign: 'center' }}>Crypto Lotto Draw #{ethSale.toString()}</h1>
-    <h1 className="second-h1" style={{ textAlign: 'center' }}>Draw ends {getDate()} days</h1>
-    <h1 className="second-h1" style={{ textAlign: 'center' }}>Prizepool {truncate(ethers.utils.formatEther((prizepool * BigInt(99)) / BigInt(100)), 2)} MATIC</h1>
+    <h1 className="second-h1" style={{ textAlign: 'center' }}>Draw ends in {getDate()} days</h1>
+    <h1 className="second-h1" style={{ textAlign: 'center' }}>Current Prizepool {truncate(ethers.utils.formatEther((prizepool * BigInt(99)) / BigInt(100)), 2)} MATIC</h1>
     <h1 className="second-h1" style={{ textAlign: 'center', color: '#200aa0' }}>Select 3 Numbers: 0.1 matic entry fee</h1>
 
     <div id="numberSelection">
