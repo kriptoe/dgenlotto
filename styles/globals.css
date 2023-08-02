@@ -32,3 +32,48 @@ h1.second-h1 {
 * {
   box-sizing: border-box;
 }
+/* styles.css for Countdown clock*/
+/* styles.css */
+
+.clock-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.separator {
+  margin: 0 5px;
+}
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box-container {
+  display: flex;
+}
+
+.box {
+  width: 40px; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+  margin-right: 5px; /* Adjust the margin between boxes */
+  background-color: lightgray;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.number {
+  font-size: 24px; /* Adjust the font size as needed */
+}
+
+.label {
+  font-size: 14px; /* Adjust the font size for labels */
+  margin-top: 5px;
+}
+.white-bg {
+  background-color: white;
+}
+.separator.white-bg {
+  color: white;
+}

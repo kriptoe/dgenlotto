@@ -1,12 +1,13 @@
 import React, {  useState, useEffect } from "react";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useAccount,useContractRead } from "wagmi";
+import { useContractRead } from "wagmi";
 import { ethers } from "ethers";
 import lotteryContract from "../contracts/Lottery.json"; // Raw ABI import (pulled from etherscan)
 import nftContract from "../contracts/NFT.json"; // Raw ABI import (pulled from etherscan)
 import Navbar from "./Navbar"; // Import the Navbar component
 import Image from 'next/image'
 import styles from "../styles/index.module.css";
+import CountdownTimer2 from "./timer";
 
 export default function NumberSelection() {
 
@@ -24,6 +25,11 @@ export default function NumberSelection() {
   const [nftImageUrl, setNftImageUrl] = useState(''); // State to store the NFT image URL
   const [isPulsing, setIsPulsing] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const endDate2 = BigInt(endDate); // Replace this with the number of seconds you want to add
+  const currentDate = new Date();
+  const targetDate = new Date(currentDate.getTime() + Number(endDate2) * 1000);
+
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -184,7 +190,8 @@ export default function NumberSelection() {
   <div style={{ height: '20px' }} />
   <div className="container" style={{ backgroundColor: '#fff', padding: '10px', margin: '0 auto', borderRadius: '20px', maxWidth: '600px' }}>
     <h1 style={{ textAlign: 'center' }}>Crypto Lotto Draw #{ethSale.toString()}</h1>
-    <h1 className="second-h1" style={{ textAlign: 'center' }}>Draw ends in {getDate()} days</h1>
+    <h1 className="second-h1" style={{ textAlign: 'center' }}> Draw ends in </h1>
+    <h1 className="second-h1" style={{ textAlign: 'center' }}><CountdownTimer2 targetDate={targetDate} /></h1>
     <h1 className="second-h1" style={{ textAlign: 'center' }}>Current Prizepool {truncate(ethers.utils.formatEther((prizepool * BigInt(99)) / BigInt(100)), 2)} MATIC</h1>
     <h1 className="second-h1" style={{ textAlign: 'center', color: '#200aa0' }}>Select 3 Numbers: 0.1 matic entry fee</h1>
 
