@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { FaFacebook, FaYoutube, FaTwitter } from 'react-icons/fa';
 import styles from "../styles/navbar.module.css";
 
 export default function Navbar() {
@@ -19,7 +20,7 @@ export default function Navbar() {
           <Link href="/" passHref>
             <span className={styles.menuLink}>Home</span>
           </Link>
-        </li>
+        </li>     
         <li className={styles.menuItem}>
           <Link href="/PastWinners" passHref>
             <span className={styles.menuLink}>Past Winners</span>
@@ -27,7 +28,7 @@ export default function Navbar() {
         </li>
         <li className={styles.menuItem}>
           <a
-            href="https://polygonscan.com/address/0x83fd9423A512356C9234227c650AF5040AedF126#code"
+            href="https://sepolia.etherscan.io/address/0x1b21B1518A7Ce517538311C9D4d3FFe1B3f6E084"
             className={styles.menuLink}
             target="_blank"
             rel="noopener noreferrer"
@@ -35,6 +36,21 @@ export default function Navbar() {
             View Contract
           </a>
         </li>
+        {/* New menu item for social media icons */}
+  {/* Social media icons */}
+  <li className={styles.menuItem}>
+    <div className={styles.socialIcons}>
+      <a href="https://www.facebook.com/profile.php?id=61550067459554" target="_blank" rel="noopener noreferrer">
+        <FaFacebook className={styles.socialIcon} />
+      </a>
+      <a href="https://www.youtube.com/channel/UCgifxfTTMXiEVTMpDF-INxQ" target="_blank" rel="noopener noreferrer">
+        <FaYoutube className={styles.socialIcon} />
+      </a>
+      <a href="https://twitter.com/pcashpeso" target="_blank" rel="noopener noreferrer">
+        <FaTwitter className={styles.socialIcon} />
+      </a>
+    </div>
+  </li>
       </ul>
     </nav>
   );

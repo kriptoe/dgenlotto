@@ -4,18 +4,17 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useContractRead } from "wagmi";
 import { ethers } from "ethers";
 //import lotteryContract from "../contracts/Lottery.json"; // Raw ABI import (pulled from etherscan)
-import lotteryContract from "../contracts/LotteryPolygon.json"; // Raw ABI import (pulled from etherscan)//
-import nftContract from "../contracts/NFTPolygon.json"; // Raw ABI import (pulled from etherscan)
+import lotteryContract from "../contracts/Lottery.json"; // Raw ABI import (pulled from etherscan)//
+import nftContract from "../contracts/NFT.json"; // Raw ABI import (pulled from etherscan)
 import Navbar from "./Navbar"; // Import the Navbar component
 import styles from "../styles/index.module.css";
 import CountdownTimer2 from "./timer";
 import Image from 'next/image';
 
-
 export default function NumberSelection() {
 
-  const FLOOR101_ADDRESS = "0x3A34a686148dAAb2A473D63b077c5AaF44cb8C2D";   // sep polygon  
-  const Lotto_ADDRESS = "0xd58b6c882D163b4D9D63FC4F3f86Be8dad7DF36a";  // polygon
+  const FLOOR101_ADDRESS = "0x4268c0Ac1eC3b3CE90C0c4D9df3eeF378AE2a1c1";   // sepolia 
+  const Lotto_ADDRESS = "0x6c90b24Bb6ca8556C09a1b328388B602d32B7266" //"0x30391E866d9B35c01e43282FaA6AEfd7d1691736";  //sepolia
 
   //const {address, isConnected} = useAccount();
   const [ethSale, setEthSale] = useState(0);  // cost of NFTs being purchased
@@ -35,7 +34,7 @@ export default function NumberSelection() {
   const currentDate = new Date();
   const targetDate = new Date(currentDate.getTime() + Number(endDate2) * 1000);
   const [contractBalance, setContractBalance] = useState(ethers.BigNumber.from(0));
-  const entryFee = 0.1;  // entryFee
+  const fee = 0.00006;
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -63,7 +62,7 @@ export default function NumberSelection() {
 
   const { data: getEndDate, error: getEndDateError } = useContractRead({
     ...contractConfig,
-    functionName: "claimPeriodLeft",
+    functionName: "timeLeftTillDrawEnds",
   });
 
   
@@ -150,7 +149,7 @@ function handleNumGamesChange(event) {
       // Flatten the selectedNumbers array to a 1-dimensional array
       const flatSelectedNumbers = selectedNumbers.flat();
       // Calculate the total price based on the number of tickets
-      const totalPrice = ethers.utils.parseEther((entryFee * numberOfTickets).toString());
+      const totalPrice = ethers.utils.parseEther((0.00006 * numberOfTickets).toString());
 
       // Call enterLotteryBULK function with the flattened array and the dynamic price
       let tx = await marketWithSigner.enterLotteryBULK(flatSelectedNumbers, { value: totalPrice });
@@ -249,7 +248,7 @@ const enterLotto = async () => {
 
   return (
     
-<div className="second-background-container">
+<div className="background-container">
   {/* Add a vertical gap of 20px */}
   <div style={{ height: '10px' }} />
   <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -266,11 +265,11 @@ const enterLotto = async () => {
   {/* Add a vertical gap of 20px */}
   <div style={{ height: '20px' }} />
   <div className="container" style={{ backgroundColor: '#fff', padding: '10px', margin: '0 auto', borderRadius: '20px', maxWidth: '600px' }}>
-    <h1 style={{ textAlign: 'center' }}>POLYGON Lotto Draw #{ethSale.toString()}</h1>
+    <h1 style={{ textAlign: 'center' }}>Crypto Lotto Draw #{ethSale.toString()}</h1>
     <h1 className="second-h1" style={{ textAlign: 'center' }}> Draw ends in </h1>
     <h1 className="second-h1" style={{ textAlign: 'center' }}><CountdownTimer2 targetDate={targetDate} /></h1>
-    <h1 className="second-h1" style={{ textAlign: 'center' }}>Current Prizepool {truncate(ethers.utils.formatEther((contractBalance )), 4)} MATIC</h1>
-    <div style={{ textAlign: 'center'}}>Select 3 Numbers: 0.1 matic per game</div>
+    <h1 className="second-h1" style={{ textAlign: 'center' }}>Current Prizepool {truncate(ethers.utils.formatEther((contractBalance )), 4)} ETH</h1>
+    <div style={{ textAlign: 'center'}}>Select 3 Numbers: 0.0006 eth entry fee per game</div>
 
       {/* Add the select box to choose the number of games */}
       <div style={{ textAlign: "center", marginBottom: "20px" }}>

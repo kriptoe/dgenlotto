@@ -46,69 +46,78 @@ const CountdownTimer = ({ targetDate }) => {
     return num.toString().padStart(2, '0');
   };
 
+  const daysLeft = padZero(timeLeft.days).split('');
+  const hoursLeft = padZero(timeLeft.hours).split('');
+  const minutesLeft = padZero(timeLeft.minutes).split('');
+  const secondsLeft = padZero(timeLeft.seconds).split('');
+
   return (
     <div>
       <div className="clock-container">
         <div className="box">
           <div className="box-container">
-            {padZero(timeLeft.days).split('').map((digit, index) => (
-              <span key={index} className="number">
-                {digit}
-              </span>
-            ))}
+            <span className="number">{daysLeft[0]}</span>
+          </div>
+        </div>
+        <div className="box">
+          <div className="box-container">
+            <span className="number">{daysLeft[1]}</span>
           </div>
         </div>
         <span className="separator"> : </span>
         <div className="box">
           <div className="box-container">
-            {padZero(timeLeft.hours).split('').map((digit, index) => (
-              <span key={index} className="number">
-                {digit}
-              </span>
-            ))}
+            <span className="number">{hoursLeft[0]}</span>
+          </div>
+        </div>
+        <div className="box">
+          <div className="box-container">
+            <span className="number">{hoursLeft[1]}</span>
           </div>
         </div>
         <span className="separator"> : </span>
         <div className="box">
           <div className="box-container">
-            {padZero(timeLeft.minutes).split('').map((digit, index) => (
-              <span key={index} className="number">
-                {digit}
-              </span>
-            ))}
+            <span className="number">{minutesLeft[0]}</span>
+          </div>
+        </div>
+        <div className="box">
+          <div className="box-container">
+            <span className="number">{minutesLeft[1]}</span>
           </div>
         </div>
         <span className="separator"> : </span>
         <div className="box">
           <div className="box-container">
-            {padZero(timeLeft.seconds).split('').map((digit, index) => (
-              <span key={index} className="number">
-                {digit}
-              </span>
-            ))}
+            <span className="number">{secondsLeft[0]}</span>
+          </div>
+        </div>
+        <div className="box">
+          <div className="box-container">
+            <span className="number">{secondsLeft[1]}</span>
           </div>
         </div>
       </div>
 
-      <div className="clock-container">
-      <div className="box white-bg">
+      <div className="clock-container">       
+      <div className="box white-bg double-box">
           <div className="label">days</div>
         </div>
-        <span className="separator white-bg">:</span>
-        <div className="box white-bg">
-        <div className="label">hours</div>
+    
+        <span className="separator white-bg">.</span>
+        <div className="box white-bg double-box">
+          <div className="label">hours</div>
         </div>
-        <span className="separator white-bg">:</span>
-        <div className="box white-bg">
-          <div className="box-container">
+
+        <span className="separator white-bg">.</span>
+        <div className="box white-bg double-box">
           <div className="label">mins</div>
-          </div>
         </div>
-        <span className="separator white-bg">:</span>
-        <div className="box white-bg">
-        <div className="label">secs</div>
+        <span className="separator white-bg">.</span>
+        <div className="box white-bg double-box">
+          <div className="label">secs</div>
         </div>
-      </div>    
+      </div>
     </div>
   );
 };

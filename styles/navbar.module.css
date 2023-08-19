@@ -95,3 +95,22 @@
 .menuLink:hover {
   color: #555;
 }
+.socialIcons {
+  display: flex;
+  gap: 10px;
+}
+
+.socialIconLink {
+  color: #000; /* Adjust the color as needed */
+  transition: color 0.3s;
+}
+
+/* Apply hover effect using filter property */
+.socialIconLink:hover {
+  filter: brightness(120%); /* Adjust the brightness value as needed */
+}
+
+.socialIcon {
+  font-size: 24px; /* Adjust the icon size as needed */
+  color: #777; /* Greyish color */
+}

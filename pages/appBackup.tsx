@@ -3,13 +3,13 @@ import '@rainbow-me/rainbowkit/styles.css';
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import type { AppProps } from 'next/app';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import {polygon,localhost} from 'wagmi/chains';
+import {arbitrum,polygon,polygonMumbai, sepolia, localhost, baseGoerli} from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
-//import { baseMainnet } from './baseMainnet'; // Import the baseMainnet chain object
+import { baseMainnet } from './baseMainnet'; // Import the baseMainnet chain object
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
-    polygon,
+    polygon,sepolia,baseGoerli,baseMainnet,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [localhost] : []),
   ],
   [publicProvider()]
