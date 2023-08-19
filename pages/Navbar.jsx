@@ -28,7 +28,7 @@ export default function Navbar() {
         </li>
         <li className={styles.menuItem}>
           <a
-            href="https://sepolia.etherscan.io/address/0x1b21B1518A7Ce517538311C9D4d3FFe1B3f6E084"
+            href="https://polygonscan.com/address/0xd58b6c882d163b4d9d63fc4f3f86be8dad7df36a"
             className={styles.menuLink}
             target="_blank"
             rel="noopener noreferrer"
