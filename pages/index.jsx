@@ -4,8 +4,8 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useContractRead } from "wagmi";
 import { ethers } from "ethers";
 //import lotteryContract from "../contracts/Lottery.json"; // Raw ABI import (pulled from etherscan)
-import lotteryContract from "../contracts/LotteryPolygon.json"; // Raw ABI import (pulled from etherscan)//
-import nftContract from "../contracts/NFTPolygon.json"; // Raw ABI import (pulled from etherscan)
+import lotteryContract from "../contracts/Lottery.json"; // Raw ABI import (pulled from etherscan)//
+import nftContract from "../contracts/NFT.json"; // Raw ABI import (pulled from etherscan)
 import Navbar from "./Navbar"; // Import the Navbar component
 import styles from "../styles/index.module.css";
 import CountdownTimer2 from "./timer";
@@ -14,15 +14,15 @@ import Image from 'next/image';
 
 export default function NumberSelection() {
 
-  const FLOOR101_ADDRESS = "0x3A34a686148dAAb2A473D63b077c5AaF44cb8C2D";   // sep polygon  
-  const Lotto_ADDRESS = "0xd58b6c882D163b4D9D63FC4F3f86Be8dad7DF36a";  // polygon
-
+  const FLOOR101_ADDRESS = "0xdC9E96d58903289E2A4771c63fa930d9d56384bA";   // sep polygon  
+ // const Lotto_ADDRESS = "0x6c90b24Bb6ca8556C09a1b328388B602d32B7266";  // base goerli
+ const Lotto_ADDRESS = "0x55Ff01197C771E1f7f97772aC9860C1F00C5F083";
   //const {address, isConnected} = useAccount();
   const [ethSale, setEthSale] = useState(0);  // cost of NFTs being purchased
   const [endDate, setEndDate] = useState(0);  // the time/date the lottery ends 
   const [txHash, setTxHash] = useState(0);
    // State to store selected numbers for each game
-  const [selectedNumbers, setSelectedNumbers] = useState([]);
+const [selectedNumbers, setSelectedNumbers] = useState([]);
   const [saleSucceeded, setSaleSucceeded] = useState(false);
   const [submitButtonText, setSubmitButtonText] = useState('Submit');
   const [nftImageUrl, setNftImageUrl] = useState(''); // State to store the NFT image URL
@@ -35,7 +35,8 @@ export default function NumberSelection() {
   const currentDate = new Date();
   const targetDate = new Date(currentDate.getTime() + Number(endDate2) * 1000);
   const [contractBalance, setContractBalance] = useState(ethers.BigNumber.from(0));
-  const entryFee = 0.1;  // entryFee
+  const entryFee = 0.1;  // entryFee approx 10cents at $1650
+  const entryFeeWEI = ethers.BigNumber.from("100000000000000000"); // 0.0001 ETH in wei
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -63,7 +64,7 @@ export default function NumberSelection() {
 
   const { data: getEndDate, error: getEndDateError } = useContractRead({
     ...contractConfig,
-    functionName: "claimPeriodLeft",
+    functionName: "timeLeftTillDrawEnds",
   });
 
   
@@ -96,7 +97,7 @@ export default function NumberSelection() {
       let temp = getEth;
       setEthSale(temp);
     }
-    // Initialize selectedNumbers state with empty arrays for each game
+    // Initialize selectedNumbers state with an array of arrays for each game
     setSelectedNumbers(Array.from({ length: numGames }, () => []));
   }, [getEth, numGames]);
 
@@ -112,31 +113,36 @@ function handleNumGamesChange(event) {
   const selectedValue = parseInt(event.target.value);
   const maxNumGames = 10; // Maximum number of games
   const newNumGames = Math.min(selectedValue, maxNumGames);
+  console.log('New numGames value:', newNumGames); // Add this line
   setNumGames(newNumGames);
 }
 
+useEffect(() => {
+  if (typeof window !== "undefined") {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const floor101Contract = new ethers.Contract(FLOOR101_ADDRESS, nftContract, provider);
 
-  useEffect(() => {
-    if (saleSucceeded) {
-      if (typeof window !== "undefined") {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const floor101Contract = new ethers.Contract(FLOOR101_ADDRESS, nftContract, provider);
-  
-        floor101Contract.on("mintEvent", async (sender, NFTid) => {
-          console.log("mintEvent:", sender, NFTid.toString());
-          const nftId = NFTid.toString();
-          try {
-            const imageUrl = await fetchTokenURI(nftId, floor101Contract);
-            if (imageUrl) {
-              setNftImageUrl(imageUrl);
-            }
-          } catch (error) {
-            console.log("Error fetching token URI:", error);
-          }
-        });
+    const handleMintEvent = async (sender, NFTid) => {
+      console.log("mintEvent:", sender, NFTid.toString());
+      const nftId = NFTid.toString();
+      try {
+        const imageUrl = await fetchTokenURI(nftId, floor101Contract);
+        if (imageUrl) {
+          setNftImageUrl(imageUrl);
+        }
+      } catch (error) {
+        console.log("Error fetching token URI:", error);
       }
-    }
-  }, [saleSucceeded]);
+    };
+
+    // Remove previous event listener
+    floor101Contract.off("mintEvent", handleMintEvent);
+    
+    // Add a new event listener
+    floor101Contract.on("mintEvent", handleMintEvent);
+  }
+}, [saleSucceeded]);
+
 
 
   const buyLottoTicket = async (numberOfTickets) => {
@@ -147,17 +153,19 @@ function handleNumGamesChange(event) {
     const marketWithSigner = marketContract.connect(signer);
   
     try {
+
+      console.log ("flatten total price" )
       // Flatten the selectedNumbers array to a 1-dimensional array
       const flatSelectedNumbers = selectedNumbers.flat();
       // Calculate the total price based on the number of tickets
-      const totalPrice = ethers.utils.parseEther((entryFee * numberOfTickets).toString());
-
+      const totalPrice =entryFeeWEI.mul(numberOfTickets);
+      
       // Call enterLotteryBULK function with the flattened array and the dynamic price
       let tx = await marketWithSigner.enterLotteryBULK(flatSelectedNumbers, { value: totalPrice });
       setSubmitButtonText('Pending');
       setIsPulsing(true); // Start the pulse animation
       const receipt = await tx.wait();
-      setTxHash(`https://polygonscan.com/tx/${tx.hash}`);
+      setTxHash(`https://goerli.basescan.org/tx/${tx.hash}`);
       // Reset the selected numbers after a successful transaction
       setSelectedNumbers(Array.from({ length: numGames }, () => []));
       setNftPurchased(true); // Set nftPurchased to true after a successful transaction
@@ -173,7 +181,9 @@ function handleNumGamesChange(event) {
       setIsPulsing(false); // Start the pulse animation
       setSaleSucceeded(true); // Set saleSucceeded to true to trigger the useEffect
      // Reset numGames to 1 after the successful transaction
+     console.log("resetting")
       setNumGames(1);
+      setSelectedNumbers(Array.from({ length: numGames }, () => [])); // Reset selectedNumbers array
     }
   };
   
@@ -198,6 +208,7 @@ function selectNumber(number, gameIndex) {
         ];
       }
     }
+    console.log('Updated selectedNumbers array:', updatedSelectedNumbers); // Add this line
     return updatedSelectedNumbers;
   });
 }
@@ -219,6 +230,7 @@ const enterLotto = async () => {
     window.alert("The lottery has ended. Please try again in the next round.");
     return; // Return early to prevent further execution of the function
   }
+  console.log("enter lotto numGames", numGames)
   buyLottoTicket(numGames);
 };
 
@@ -243,7 +255,7 @@ const enterLotto = async () => {
         randomNumbers[gameIndex].push(selectedNumber);
       }
     }
-
+   console.log("numGAmes in random - ", numGames)
     setSelectedNumbers(randomNumbers);
   };
 
@@ -266,7 +278,7 @@ const enterLotto = async () => {
   {/* Add a vertical gap of 20px */}
   <div style={{ height: '20px' }} />
   <div className="container" style={{ backgroundColor: '#fff', padding: '10px', margin: '0 auto', borderRadius: '20px', maxWidth: '600px' }}>
-    <h1 style={{ textAlign: 'center' }}>POLYGON Lotto Draw #{ethSale.toString()}</h1>
+    <h1 style={{ textAlign: 'center' }}>DGEN Lotto Draw #{ethSale.toString()}</h1>
     <h1 className="second-h1" style={{ textAlign: 'center' }}> Draw ends in </h1>
     <h1 className="second-h1" style={{ textAlign: 'center' }}><CountdownTimer2 targetDate={targetDate} /></h1>
     <h1 className="second-h1" style={{ textAlign: 'center' }}>Current Prizepool {truncate(ethers.utils.formatEther((contractBalance )), 4)} MATIC</h1>
