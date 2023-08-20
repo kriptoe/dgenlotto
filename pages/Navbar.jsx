@@ -21,14 +21,10 @@ export default function Navbar() {
             <span className={styles.menuLink}>Home</span>
           </Link>
         </li>     
-        <li className={styles.menuItem}>
-          <Link href="/PastWinners" passHref>
-            <span className={styles.menuLink}>Past Winners</span>
-          </Link>
-        </li>
+
         <li className={styles.menuItem}>
           <a
-            href="https://polygonscan.com/address/0xd58b6c882d163b4d9d63fc4f3f86be8dad7df36a"
+            href="https://polygonscan.com/address/0x55Ff01197C771E1f7f97772aC9860C1F00C5F083"
             className={styles.menuLink}
             target="_blank"
             rel="noopener noreferrer"

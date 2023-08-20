@@ -278,9 +278,23 @@ const enterLotto = async () => {
   {/* Add a vertical gap of 20px */}
   <div style={{ height: '20px' }} />
   <div className="container" style={{ backgroundColor: '#fff', padding: '10px', margin: '0 auto', borderRadius: '20px', maxWidth: '600px' }}>
-    <h1 style={{ textAlign: 'center' }}>DGEN Lotto Draw #{ethSale.toString()}</h1>
-    <h1 className="second-h1" style={{ textAlign: 'center' }}> Draw ends in </h1>
-    <h1 className="second-h1" style={{ textAlign: 'center' }}><CountdownTimer2 targetDate={targetDate} /></h1>
+  
+  <div style={{ textAlign: 'center' }}>
+  <h1>DGEN Lotto Draw #{ethSale.toString()}</h1>
+  <Image
+    src="/caeser.jpg"
+    alt="NFT"
+    width={250}
+    height={320}
+    style={{
+      display: 'block', // Make the image a block element for margin auto to work
+      margin: '0 auto', // Center align the image horizontally
+      borderRadius: '20%', // Make the border circular
+      border: '2px solid #ccc', // Add a border around the circular image
+    }}
+  />
+</div>
+    <h1 className="second-h1" style={{ textAlign: 'center' }}>Join Caesar Simian on Sunday night for the first live draw</h1>
     <h1 className="second-h1" style={{ textAlign: 'center' }}>Current Prizepool {truncate(ethers.utils.formatEther((contractBalance )), 4)} MATIC</h1>
     <div style={{ textAlign: 'center'}}>Select 3 Numbers: 0.1 matic per game</div>
 
