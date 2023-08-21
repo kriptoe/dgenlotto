@@ -101,28 +101,32 @@ function handleNumGamesChange(event) {
 }
 
 useEffect(() => {
-  if (typeof window !== "undefined") {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const floor101Contract = new ethers.Contract(FLOOR101_ADDRESS, nftContract, provider);
+  try {
+    if (typeof window !== "undefined") {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const floor101Contract = new ethers.Contract(FLOOR101_ADDRESS, nftContract, provider);
 
-    const handleMintEvent = async (sender, NFTid) => {
-      console.log("mintEvent:", sender, NFTid.toString());
-      const nftId = NFTid.toString();
-      try {
-        const imageUrl = await fetchTokenURI(nftId, floor101Contract);
-        if (imageUrl) {
-          setNftImageUrl(imageUrl);
+      const handleMintEvent = async (sender, NFTid) => {
+        console.log("mintEvent:", sender, NFTid.toString());
+        const nftId = NFTid.toString();
+        try {
+          const imageUrl = await fetchTokenURI(nftId, floor101Contract);
+          if (imageUrl) {
+            setNftImageUrl(imageUrl);
+          }
+        } catch (error) {
+          console.log("Error fetching token URI:", error);
         }
-      } catch (error) {
-        console.log("Error fetching token URI:", error);
-      }
-    };
+      };
 
-    // Remove previous event listener
-    floor101Contract.off("mintEvent", handleMintEvent);
-    
-    // Add a new event listener
-    floor101Contract.on("mintEvent", handleMintEvent);
+      // Remove previous event listener
+      floor101Contract.off("mintEvent", handleMintEvent);
+      
+      // Add a new event listener
+      floor101Contract.on("mintEvent", handleMintEvent);
+    }
+  } catch (error) {
+    console.log("An error occurred within useEffect:", error);
   }
 }, [saleSucceeded]);
 
@@ -272,7 +276,7 @@ const enterLotto = async () => {
   />
 </div>
     <h1 className="second-h1" style={{ textAlign: 'center' }}>Live draw 8pm (Singapore timezone) Sunday 27 August. </h1>
-    <h1 className="second-h1" style={{ textAlign: 'center' }}>Current Prizepool {truncate(ethers.utils.formatEther((contractBalance )), 4)} MATIC</h1>
+    <h1 className="second-h1" style={{ textAlign: 'center' }}>Current Prizepool 1604 MATIC</h1>
     <div style={{ textAlign: 'center'}}>Select 3 Numbers: 0.1 matic per game</div>
 
       {/* Add the select box to choose the number of games */}
