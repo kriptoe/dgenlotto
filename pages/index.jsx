@@ -8,7 +8,6 @@ import lotteryContract from "../contracts/Lottery.json"; // Raw ABI import (pull
 import nftContract from "../contracts/NFT.json"; // Raw ABI import (pulled from etherscan)
 import Navbar from "./Navbar"; // Import the Navbar component
 import styles from "../styles/index.module.css";
-import CountdownTimer2 from "./timer";
 import Image from 'next/image';
 
 
@@ -18,11 +17,10 @@ export default function NumberSelection() {
  // const Lotto_ADDRESS = "0x6c90b24Bb6ca8556C09a1b328388B602d32B7266";  // base goerli
  const Lotto_ADDRESS = "0x55Ff01197C771E1f7f97772aC9860C1F00C5F083";
   //const {address, isConnected} = useAccount();
-  const [ethSale, setEthSale] = useState(0);  // cost of NFTs being purchased
-  const [endDate, setEndDate] = useState(0);  // the time/date the lottery ends 
+  const [ethSale, setEthSale] = useState(0);  // cost of NFTs being purchased 
   const [txHash, setTxHash] = useState(0);
    // State to store selected numbers for each game
-const [selectedNumbers, setSelectedNumbers] = useState([]);
+  const [selectedNumbers, setSelectedNumbers] = useState([]);
   const [saleSucceeded, setSaleSucceeded] = useState(false);
   const [submitButtonText, setSubmitButtonText] = useState('Submit');
   const [nftImageUrl, setNftImageUrl] = useState(''); // State to store the NFT image URL
@@ -31,9 +29,6 @@ const [selectedNumbers, setSelectedNumbers] = useState([]);
   const [numGames, setNumGames] = useState(1); // State to store the number of games selected
   const [nftPurchased, setNftPurchased] = useState(false); // New state for tracking NFT purchase
 
-  const endDate2 = BigInt(endDate); // Replace this with the number of seconds you want to add
-  const currentDate = new Date();
-  const targetDate = new Date(currentDate.getTime() + Number(endDate2) * 1000);
   const [contractBalance, setContractBalance] = useState(ethers.BigNumber.from(0));
   const entryFee = 0.1;  // entryFee approx 10cents at $1650
   const entryFeeWEI = ethers.BigNumber.from("100000000000000000"); // 0.0001 ETH in wei
@@ -62,12 +57,7 @@ const [selectedNumbers, setSelectedNumbers] = useState([]);
     functionName: "s_lotteryNumber",
   });
 
-  const { data: getEndDate, error: getEndDateError } = useContractRead({
-    ...contractConfig,
-    functionName: "timeLeftTillDrawEnds",
-  });
 
-  
   useEffect(() => {
     // Define the provider
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -84,13 +74,6 @@ const [selectedNumbers, setSelectedNumbers] = useState([]);
 
     fetchContractBalance();
   }, [Lotto_ADDRESS]);
-
-  useEffect(() => {
-    if (getEndDate) {
-      let temp = getEndDate;
-      setEndDate(temp);
-    }
-  }, [getEndDate]);
 
   useEffect(() => {
     if (getEth) {
@@ -224,12 +207,6 @@ const enterLotto = async () => {
     alert('Please select exactly 3 numbers for each game.');
     return;
   }
-
-  if (endDate === 0) {
-    // Show a pop-up alert to notify the user that the lottery has ended
-    window.alert("The lottery has ended. Please try again in the next round.");
-    return; // Return early to prevent further execution of the function
-  }
   console.log("enter lotto numGames", numGames)
   buyLottoTicket(numGames);
 };
@@ -294,7 +271,7 @@ const enterLotto = async () => {
     }}
   />
 </div>
-    <h1 className="second-h1" style={{ textAlign: 'center' }}>Join Caesar Simian on Sunday night for the first live draw</h1>
+    <h1 className="second-h1" style={{ textAlign: 'center' }}>Live draw 8pm (Singapore timezone) Sunday 27 August. </h1>
     <h1 className="second-h1" style={{ textAlign: 'center' }}>Current Prizepool {truncate(ethers.utils.formatEther((contractBalance )), 4)} MATIC</h1>
     <div style={{ textAlign: 'center'}}>Select 3 Numbers: 0.1 matic per game</div>
 
