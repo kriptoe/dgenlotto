@@ -59,23 +59,6 @@ export default function NumberSelection() {
 
 
   useEffect(() => {
-    // Define the provider
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-  
-    // Fetch the contract balance
-    const fetchContractBalance = async () => {
-      try {
-        const balance = await provider.getBalance(Lotto_ADDRESS);
-        setContractBalance(balance);
-      } catch (error) {
-        console.error('Error fetching contract balance:', error);
-      }
-    };
-
-    fetchContractBalance();
-  }, [Lotto_ADDRESS]);
-
-  useEffect(() => {
     if (getEth) {
       let temp = getEth;
       setEthSale(temp);
@@ -92,13 +75,6 @@ useEffect(() => {
   }
 }, [saleSucceeded]);
 
-function handleNumGamesChange(event) {
-  const selectedValue = parseInt(event.target.value);
-  const maxNumGames = 10; // Maximum number of games
-  const newNumGames = Math.min(selectedValue, maxNumGames);
-  console.log('New numGames value:', newNumGames); // Add this line
-  setNumGames(newNumGames);
-}
 
 useEffect(() => {
   try {
@@ -130,6 +106,14 @@ useEffect(() => {
   }
 }, [saleSucceeded]);
 
+
+function handleNumGamesChange(event) {
+  const selectedValue = parseInt(event.target.value);
+  const maxNumGames = 10; // Maximum number of games
+  const newNumGames = Math.min(selectedValue, maxNumGames);
+  console.log('New numGames value:', newNumGames); // Add this line
+  setNumGames(newNumGames);
+}
 
 
   const buyLottoTicket = async (numberOfTickets) => {
@@ -262,18 +246,6 @@ const enterLotto = async () => {
   
   <div style={{ textAlign: 'center' }}>
   <h1>DGEN Lotto Draw #{ethSale.toString()}</h1>
-  <Image
-    src="/caeser.jpg"
-    alt="NFT"
-    width={250}
-    height={320}
-    style={{
-      display: 'block', // Make the image a block element for margin auto to work
-      margin: '0 auto', // Center align the image horizontally
-      borderRadius: '20%', // Make the border circular
-      border: '2px solid #ccc', // Add a border around the circular image
-    }}
-  />
 </div>
     <h1 className="second-h1" style={{ textAlign: 'center' }}>Live draw 8pm (Singapore timezone) Sunday 27 August. </h1>
     <h1 className="second-h1" style={{ textAlign: 'center' }}>Current Prizepool 1604 MATIC</h1>
