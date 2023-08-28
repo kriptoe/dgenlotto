@@ -247,7 +247,7 @@ const enterLotto = async () => {
   <div style={{ textAlign: 'center' }}>
   <h1>DGEN Lotto Draw #{ethSale.toString()}</h1>
 </div>
-    <h1 className="second-h1" style={{ textAlign: 'center' }}>Live draw 8pm (Singapore timezone) Sunday 27 August. </h1>
+    <h1 className="second-h1" style={{ textAlign: 'center' }}>Live draw 9pm (Singapore timezone) Monday 4 September. </h1>
     <h1 className="second-h1" style={{ textAlign: 'center' }}>Current Prizepool 2597 MATIC</h1>
     <div style={{ textAlign: 'center'}}>Select 3 Numbers: 0.1 matic per game</div>
 
